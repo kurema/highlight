@@ -16,7 +16,7 @@ A relatively simple and extensible syntax highlighter written in C#</Description
     <FileVersion>1.0.0.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <Authors>dougcunha</Authors>
-    <PackageId>Highlight</PackageId>
+    <PackageId>Highlight.Standard</PackageId>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/dougcunha/highlight</PackageProjectUrl>
     <PackageTags>library syntax highlight</PackageTags>
