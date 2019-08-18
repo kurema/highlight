@@ -3,21 +3,28 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <ProjectGuid>{A78FD882-5894-4AA8-9BE5-D5E6F16E9A78}</ProjectGuid>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>8</LangVersion>
+    <LangVersion>preview</LangVersion>
     <AssemblyTitle>Highlight</AssemblyTitle>
-    <Company>Thomas Haugland Johansen</Company>
-    <Product>Highlight</Product>
-    <Description>A relatively simple and extensible syntax highlighter written in C#</Description>
-    <Copyright>Copyright © 2004 Thomas Haugland Johansen</Copyright>
+    <Company>dougcunha</Company>
+    <Product>Highlight Standard</Product>
+    <Description>**This package is a fork from https://github.com/thomasjo/highlight (Thomas Haugland Johansen)**
+
+A relatively simple and extensible syntax highlighter written in C#</Description>
+    <Copyright>MIT</Copyright>
     <Version>4.0.0</Version>
-    <AssemblyVersion>4.0.0.0</AssemblyVersion>
-    <FileVersion>4.0.0.0</FileVersion>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
-    <Authors>Thomas Haugland Johansen</Authors>
+    <Authors>dougcunha</Authors>
     <PackageId>Highlight</PackageId>
-    <PackageLicenseUrl>https://github.com/thomasjo/highlight/blob/master/LICENSE.md</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/thomasjo/highlight</PackageProjectUrl>
-    <PackageTags>Library</PackageTags>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/dougcunha/highlight</PackageProjectUrl>
+    <PackageTags>library syntax highlight</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIconUrl>https://raw.githubusercontent.com/dougcunha/highlight/master/highlight.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/dougcunha/highlight</RepositoryUrl>
+    <PackageReleaseNotes>Updating project to netstandard2.0</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -25,9 +32,6 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System.Web" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources.Designer.cs">
       <AutoGen>True</AutoGen>

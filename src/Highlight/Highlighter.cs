@@ -1,14 +1,11 @@
-using System;
-using Highlight.Configuration;
-using Highlight.Engines;
-
 namespace Highlight
 {
+    using System;
+    using Highlight.Configuration;
+    using Highlight.Engines;
+
     public class Highlighter
     {
-        public IEngine Engine { get; set; }
-        public IConfiguration Configuration { get; set; }
-
         public Highlighter(IEngine engine, IConfiguration configuration)
         {
             Engine = engine;
@@ -16,22 +13,22 @@ namespace Highlight
         }
 
         public Highlighter(IEngine engine)
-            : this(engine, new DefaultConfiguration())
-        {
-        }
+        : this(engine, new DefaultConfiguration()) { }
+
+        public IConfiguration Configuration { get; set; }
+        public IEngine Engine { get; set; }
 
         public string Highlight(string definitionName, string input)
         {
-            if (definitionName == null) {
-                throw new ArgumentNullException("definitionName");
-            }
+            if (definitionName == null)
+                throw new ArgumentNullException(nameof(definitionName));
 
-            if (Configuration.Definitions.ContainsKey(definitionName)) {
-                var definition = Configuration.Definitions[definitionName];
-                return Engine.Highlight(definition, input);
-            }
+            if (!Configuration.Definitions.ContainsKey(definitionName))
+                return input;
 
-            return input;
+            var definition = Configuration.Definitions[definitionName];
+
+            return Engine.Highlight(definition, input);
         }
     }
 }

@@ -1,22 +1,18 @@
-﻿using System;
-using System.Xml.Linq;
-
-namespace Highlight.Extensions
+﻿namespace Highlight.Extensions
 {
+    using System;
+    using System.Xml.Linq;
+
     internal static class XmlExtensions
     {
         public static string GetAttributeValue(this XElement element, XName name)
         {
-            if (element == null) {
-                throw new ArgumentNullException("element");
-            }
+            if (element == null)
+                throw new ArgumentNullException(nameof(element));
 
             var attribute = element.Attribute(name);
-            if (attribute == null) {
-                return null;
-            }
 
-            return attribute.Value;
+            return attribute?.Value;
         }
     }
 }
