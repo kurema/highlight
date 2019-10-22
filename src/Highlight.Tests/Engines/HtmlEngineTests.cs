@@ -8,7 +8,7 @@ namespace Highlight.Tests.Engines
     [TestFixture]
     public class HtmlEngineTests
     {
-        private IEngine _engine;
+        private EngineGeneric<string> _engine;
         private IConfiguration _configuration;
 
         [OneTimeSetUp]

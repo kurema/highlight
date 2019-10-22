@@ -4,27 +4,47 @@ namespace Highlight
     using Highlight.Configuration;
     using Highlight.Engines;
 
-    public class Highlighter
+
+    public class Highlighter : HighlighterGeneric<string>
     {
-        public Highlighter(IEngine engine, IConfiguration configuration)
+        public Highlighter(IEngineGeneric<string> engine) : base(engine)
+        {
+        }
+
+        public Highlighter(IEngineGeneric<string> engine, IConfiguration configuration) : base(engine, configuration)
+        {
+        }
+    }
+
+
+    public class HighlighterGeneric<T>
+    {
+        public HighlighterGeneric(IEngineGeneric<T> engine, IConfiguration configuration)
         {
             Engine = engine;
             Configuration = configuration;
         }
 
-        public Highlighter(IEngine engine)
+        public HighlighterGeneric(IEngineGeneric<T> engine)
         : this(engine, new DefaultConfiguration()) { }
 
         public IConfiguration Configuration { get; set; }
-        public IEngine Engine { get; set; }
+        public IEngineGeneric<T> Engine { get; set; }
 
-        public string Highlight(string definitionName, string input)
+        public T Highlight(string definitionName, string input)
         {
             if (definitionName == null)
                 throw new ArgumentNullException(nameof(definitionName));
 
             if (!Configuration.Definitions.ContainsKey(definitionName))
-                return input;
+            {
+                //I want to write like this.
+                //if (typeof(T) == typeof(string)) return (T)input;
+                //But it's wrong code. So instead...
+                if (input is T result) return result;
+
+                return default(T);
+            }
 
             var definition = Configuration.Definitions[definitionName];
 

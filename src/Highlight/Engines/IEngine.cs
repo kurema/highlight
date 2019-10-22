@@ -1,9 +1,6 @@
-﻿using Highlight.Patterns;
-
-namespace Highlight.Engines
+﻿namespace Highlight.Engines
 {
-    public interface IEngine
+    public interface IEngine:IEngineGeneric<string>
     {
-        string Highlight(Definition definition, string input);
     }
 }
