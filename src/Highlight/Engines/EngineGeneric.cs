@@ -7,16 +7,18 @@
 
     public abstract class EngineGeneric<T> : IEngineGeneric<T>
     {
+        protected const RegexOptions DEFAULT_REGEX_OPTIONS = RegexOptions.ExplicitCapture | RegexOptions.IgnorePatternWhitespace;
+
         public T Highlight(Definition definition, string input)
         {
             if (definition == null)
                 throw new ArgumentNullException(nameof(definition));
 
             var output = PreHighlight(definition, input);
-            T output2 = HighlightUsingRegex(definition, output);
-            output2 = PostHighlight(definition, output2);
+            T outputT = HighlightUsingRegex(definition, output);
+            outputT = PostHighlight(definition, outputT);
 
-            return output2;
+            return outputT;
         }
 
         protected virtual T PostHighlight(Definition definition, T input)
@@ -55,6 +57,34 @@
             };
         }
 
+        protected static RegexOptions GetRegexOptions(Definition definition)
+    => definition.CaseSensitive
+        ? DEFAULT_REGEX_OPTIONS | RegexOptions.IgnoreCase
+        : DEFAULT_REGEX_OPTIONS;
+
+
         protected abstract T HighlightUsingRegex(Definition definition, string input);
+
+        protected (string,T)[] SplitUsingRegex(Definition definition, string input)
+        {
+            var regexOptions = GetRegexOptions(definition);
+            var regexPattern = definition.GetRegexPattern();
+
+            var result = new System.Collections.Generic.List<(string, T)>();
+            var matches = Regex.Matches(input, regexPattern, regexOptions);
+            int lastIndex = 0;
+            foreach (Match item in matches)
+            {
+                var preText = input.Substring(lastIndex, item.Index - lastIndex);
+                result.Add((preText, ElementMatchHandler(definition, item)));
+                lastIndex = item.Index + item.Length;
+            }
+            if (lastIndex < input.Length)
+            {
+                var preText = input.Substring(lastIndex, input.Length - lastIndex);
+                result.Add((preText, default(T)));
+            }
+            return result.ToArray();
+        }
     }
 }

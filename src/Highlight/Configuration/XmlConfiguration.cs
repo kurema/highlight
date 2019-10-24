@@ -23,6 +23,8 @@
             => GetDefinitions();
 
         protected XDocument XmlDocument { get; set; }
+        //Deserialization may be better. But lots of fix is needed.
+        //protected Highlight.Definitions.definitions DefinitionsXml { get; set; }
 
         private BlockPattern GetBlockPattern(XElement patternElement)
         {
