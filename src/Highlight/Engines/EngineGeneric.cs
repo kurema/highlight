@@ -7,7 +7,6 @@
 
     public abstract class EngineGeneric<T> : IEngineGeneric<T>
     {
-
         public T Highlight(Definition definition, string input)
         {
             if (definition == null)
