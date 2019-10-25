@@ -3,7 +3,7 @@ namespace Highlight.Engines
     using System.Text.RegularExpressions;
     using Highlight.Patterns;
 
-    public abstract class Engine : EngineGeneric<string>
+    public abstract class Engine : EngineGeneric<string,string>
     {
         protected override string ProcessSimpleConvert(string input) => input;
 

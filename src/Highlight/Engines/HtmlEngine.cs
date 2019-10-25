@@ -24,10 +24,12 @@ namespace Highlight.Engines
 
                 return string.Format(STYLE_SPAN_FORMAT, cssStyle, input);
             }
+            else
+            {
+                var cssClassName = HtmlEngineHelper.CreateCssClassName(definition.Name, null);
 
-            var cssClassName = HtmlEngineHelper.CreateCssClassName(definition.Name, null);
-
-            return string.Format(CLASS_SPAN_FORMAT, cssClassName, input);
+                return string.Format(CLASS_SPAN_FORMAT, cssClassName, input);
+            }
         }
 
         protected override string PreHighlight(Definition definition, string input)
@@ -40,16 +42,27 @@ namespace Highlight.Engines
 
         protected override string ProcessBlockPatternMatch(Definition definition, BlockPattern pattern, Match match)
         {
+            if (definition == null)
+                throw new ArgumentNullException(nameof(definition));
+
+            if (pattern == null)
+                throw new ArgumentNullException(nameof(pattern));
+
+            if (match == null)
+                throw new ArgumentNullException(nameof(match));
+
             if (!UseCss)
             {
                 var patternStyle = HtmlEngineHelper.CreatePatternStyle(pattern.Style);
 
                 return string.Format(STYLE_SPAN_FORMAT, patternStyle, match.Value);
             }
+            else
+            {
+                var cssClassName = HtmlEngineHelper.CreateCssClassName(definition.Name, pattern.Name);
 
-            var cssClassName = HtmlEngineHelper.CreateCssClassName(definition.Name, pattern.Name);
-
-            return string.Format(CLASS_SPAN_FORMAT, cssClassName, match.Value);
+                return string.Format(CLASS_SPAN_FORMAT, cssClassName, match.Value);
+            }
         }
 
         protected override string ProcessMarkupPatternMatch(Definition definition, MarkupPattern pattern, Match match)
@@ -177,10 +190,12 @@ namespace Highlight.Engines
 
                 return string.Format(STYLE_SPAN_FORMAT, patternStyle, match.Value);
             }
+            else
+            {
+                var cssClassName = HtmlEngineHelper.CreateCssClassName(definition.Name, pattern.Name);
 
-            var cssClassName = HtmlEngineHelper.CreateCssClassName(definition.Name, pattern.Name);
-
-            return string.Format(CLASS_SPAN_FORMAT, cssClassName, match.Value);
+                return string.Format(CLASS_SPAN_FORMAT, cssClassName, match.Value);
+            }
         }
 
         private string ProcessMarkupPatternAttributeMatches(Definition definition, MarkupPattern pattern, Match match)

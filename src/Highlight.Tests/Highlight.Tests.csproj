@@ -26,13 +26,13 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.14.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Highlight\Highlight.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Engines\Resources\InputOutput.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InputOutput.resx</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Highlight\Highlight.csproj" />
   </ItemGroup>
 </Project>
